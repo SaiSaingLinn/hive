@@ -1,0 +1,47 @@
+/* @font-face {
+  font-family: 'SatoshiMedium';
+  src: url('/fonts/Satoshi-Medium.ttf'), url('/fonts/Satoshi-Medium.woff'), url('/fonts/Satoshi-Medium.woff2');
+  font-display: swap;
+} */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+    
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  /* min-height: calc(100vh - 60px); */
+  /* overflow-x: hidden; */
+  /* min-height: 100vh; */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* nprogress customised style  */
+#nprogress .bar { background: #f88e35 !important; z-index: 99999 !important;}
+#nprogress .spinner { z-index: 99999 !important;}
+#nprogress .spinner-icon {border-top-color: #f88e35 !important; border-left-color: #f88e35 !important;}
+/* #nprogress {
+  .bar {
+    background: ${colors.pageBg};
+  }
+  .spinner {
+    left: 15px;
+    @media (max-width: 991px) {
+      left: 5px;
+      top: 5px;
+    }
+    .spinner-icon {
+      border-top-color: ${colors.pageBg};
+      border-left-color: ${colors.pageBg};
+    }
+  }
+} */
