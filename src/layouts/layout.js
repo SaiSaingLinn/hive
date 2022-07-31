@@ -9,8 +9,8 @@ import 'nprogress/nprogress.css';
 const Layout = ({ children }, showAfterMs = 250, options = { minimum: 0.01, speed: 500 }) => {
   const router = useRouter();
   // only showHeader on /menu and /history
-  const showHeader = router.asPath === "/menu" || router.asPath === "/orders" || router.pathname === "/order/[id]";
-  const showFooter = router.asPath === "/menu" || router.asPath === "/orders" || router.pathname === "/order/[id]";
+  const showHeader = router.asPath !== "/login" || router.asPath !== "/register";
+  const showFooter = router.asPath !== "/login" || router.asPath !== "/register";
   // const showHeader = router.pathname !== "/menu" ? false : true;
   // const showFooter = router.pathname !== "/menu" ? false : true;
   
@@ -52,7 +52,7 @@ const Layout = ({ children }, showAfterMs = 250, options = { minimum: 0.01, spee
       <main style={showFooter ? {marginBottom: '60px'} : {marginBottom: '0'}}>
         { children }
       </main>
-      {showFooter && <Footer />}
+      {/* {showFooter && <Footer />} */}
     </div> 
   );
 }

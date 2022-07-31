@@ -68,4 +68,4 @@ export default function Home() {
   )
 }
 
-Home.requireAuth = true
+Home.requireAuth = false
