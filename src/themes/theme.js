@@ -224,9 +224,19 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           borderRadius: '20px',
-          boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.16)',
+          boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.16)',
+          '&:hover': {
+            boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.16)',
+          },
         },
       },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          paddingBottom: '12px !important',
+        }
+      }
     },
     MuiPaginationItem: {
       styleOverrides: {
@@ -318,6 +328,13 @@ theme = createTheme(theme, {
           marginBottom: '5px',
         },
       }
+    },
+    MuiBreadcrumbs: {
+      styleOverrides: {
+        root: {
+          padding: '10px 0',
+        },
+      },
     },
   },
 });

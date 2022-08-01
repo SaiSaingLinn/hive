@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { authStore } from "service";
 import Link from 'next/link';
 
-export default function Login() {
+export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const dispatch = useDispatch()
@@ -42,15 +42,15 @@ export default function Login() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      submitLogin(values);
+      submitRegister(values);
     },
   });
 
   // async function submit form 
-  const submitLogin = async (values) => {
+  const submitRegister = async (values) => {
     setLoading(true);
     setTimeout(async () => {
-      let res = await dispatch(auth.sendLogin(values))
+      let res = await dispatch(auth.sendRegister(values))
       if (res.status === 200) {
         setError(false);
         setLoading(false);
@@ -78,10 +78,10 @@ export default function Login() {
             justifyContent: 'center',
           }}
         >
-          <Typography component="h3" variant='h3' mb={1}>Login</Typography>
+          <Typography component="h3" variant='h3' mb={1}>Register</Typography>
           <Box sx={{display: 'flex'}}>
-            <Typography component="p" variant='p' mb={2}>Don't have an account?</Typography>
-            <Link href="/register" passHref>
+            <Typography component="p" variant='p' mb={2}>Already have an account?</Typography>
+            <Link href="/login" passHref>
               <a>
                 <Typography 
                   sx={{
@@ -91,7 +91,7 @@ export default function Login() {
                       textDecoration: 'underline',
                     }
                   }}
-                >Register here</Typography>
+                >Login here</Typography>
               </a>
             </Link>
           </Box>

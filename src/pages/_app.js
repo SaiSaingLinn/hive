@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 // import { DefaultSeo } from 'next-seo'
@@ -39,19 +39,48 @@ const LayoutComponent = dynamic(() => import('src/layouts/layout'), {
 function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const store = useStore(pageProps.initialReduxState)
+  const [showChild, setShowChild] = useState(false);
 
-  return (
-    <Provider store={store}>
-      <CacheProvider value={emotionCache}>
-        <Head>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <ThemeProvider theme={theme}>
-          <AuthProvider>
-            {
-              // if requireAuth property is present - protect the page 
-              Component.requireAuth ? (                
-                <AuthGuard>
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
+  if (typeof window === 'undefined') {
+    return <></>;
+  } else {
+    return (
+      <Provider store={store}>
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
+          <ThemeProvider theme={theme}>
+            <AuthProvider>
+              {
+                // if requireAuth property is present - protect the page 
+                Component.requireAuth ? (                
+                  <AuthGuard>
+                    <LayoutComponent>
+                      
+                      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                      <CssBaseline />
+                      <motion.div key={props?.router?.route} initial="pageInitial" animate="pageAnimate" variants={{
+                        pageInitial: {
+                          opacity: 0
+                        },
+                        pageAnimate: {
+                          opacity: 1
+                        },
+                      }}>
+                        <Component {...pageProps} />
+                      </motion.div>
+                    </LayoutComponent>
+                  </AuthGuard>                
+                ) : (
+                  // public page
                   <LayoutComponent>
                     
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
@@ -67,31 +96,14 @@ function MyApp(props) {
                       <Component {...pageProps} />
                     </motion.div>
                   </LayoutComponent>
-                </AuthGuard>                
-              ) : (
-                // public page
-                <LayoutComponent>
-                  
-                  {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                  <CssBaseline />
-                  <motion.div key={props?.router?.route} initial="pageInitial" animate="pageAnimate" variants={{
-                    pageInitial: {
-                      opacity: 0
-                    },
-                    pageAnimate: {
-                      opacity: 1
-                    },
-                  }}>
-                    <Component {...pageProps} />
-                  </motion.div>
-                </LayoutComponent>
-              )
-            }
-          </AuthProvider>
-        </ThemeProvider>
-      </CacheProvider>
-    </Provider>
-  )
+                )
+              }
+            </AuthProvider>
+          </ThemeProvider>
+        </CacheProvider>
+      </Provider>
+    )
+  }
 }
 
 export default MyApp
