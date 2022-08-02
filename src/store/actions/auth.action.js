@@ -29,7 +29,7 @@ const sendRegister = data => async dispatch => {
     .catch(error => dispatch(ToDoError(types.SEND_REGISTER_ERROR, error)))
 }
 
-const logOut = () => async dispatch => {
+const signOut = () => async dispatch => {
   dispatch(ToDoSuccess(types.SEND_LOGIN_SUCCESS, null))
   dispatch(ToDoSuccess(types.SEND_REGISTER_SUCCESS, null))
   authStore.removeAuth()
@@ -38,5 +38,5 @@ const logOut = () => async dispatch => {
 export const auth = {
   sendLogin,
   sendRegister,
-  logOut,
+  signOut,
 }

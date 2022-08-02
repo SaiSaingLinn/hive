@@ -1,11 +1,10 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
-import { alpha } from '@mui/material';
 
 // Create a theme instance.
 let theme = createTheme({
   typography: {
-    fontFamily: 'Dosis, sans-serif',
+    fontFamily: 'Roboto, sans-serif',
   },
   palette: {
     primary: {
@@ -51,7 +50,7 @@ theme = createTheme(theme, {
         // Name of the slot
         root: {
           // Some CSS
-          background: theme.palette.secondary.main,
+          background: theme.palette.primary.main,
         },
       },
     },
@@ -76,20 +75,6 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiAutocomplete: {
-      styleOverrides: {
-        paper: {
-          borderRadius: '0px',
-        },
-      },
-    },
-    MuiDrawer: {
-      styleOverrides: {
-        paper: {
-          background: theme.palette.secondary.main,
-        },
-      },
-    },
     MuiTypography: {
       styleOverrides: {
         root: {
@@ -99,14 +84,14 @@ theme = createTheme(theme, {
           fontSize: '2rem',
           fontWeight: '800',
           [theme.breakpoints.down('md')]: {
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
           },
         },
         h2: {
           fontSize: '2rem',
           fontWeight: '800',
           [theme.breakpoints.down('md')]: {
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
           },
         },
         h3: {
@@ -205,21 +190,6 @@ theme = createTheme(theme, {
         }
       },
     },
-    MuiDialog: {
-      styleOverrides: {
-      },
-    },
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          fontSize: '1.25rem',
-          fontWeight: '800',
-          [theme.breakpoints.down('md')]: {
-            fontSize: '1rem',
-          },
-        },
-      },
-    },
     MuiCard: {
       styleOverrides: {
         root: {
@@ -253,51 +223,6 @@ theme = createTheme(theme, {
             '&:hover': {
               background: theme.palette.primary.main,
             },
-          },
-        },
-      },
-    },
-    MuiBottomNavigation: {
-      styleOverrides: {
-        root: {
-          background: theme.palette.secondary.main,
-        },
-      },
-    },
-    MuiBottomNavigationAction: {
-      styleOverrides: {
-        root: {
-          color: theme.palette.text.main,
-          paddingTop: '6px',
-          '&.selected': {
-            color: theme.palette.primary.main,
-          },
-          '&.Mui-selected': {
-            color: theme.palette.primary.main,
-          },
-        },
-        label: {
-          fontSize: '0.875rem',
-          opacity: 1,
-          [theme.breakpoints.down('sm')]: {
-            fontSize: '0.75rem',
-          },
-        }
-      },
-    },
-    MuiImageListItem: {
-      styleOverrides: {
-        root: {
-          height: '100% !important',
-        },
-      },
-    },
-    MuiImageListItemBar: {
-      styleOverrides: {
-        title: {
-          lineHeight: '26px',
-          [theme.breakpoints.down('sm')]: {
-            fontSize: '0.875rem',
           },
         },
       },

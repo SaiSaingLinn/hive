@@ -18,7 +18,14 @@ const getCart = () => {
   }
 }
 
+const removeAllCart = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('cartInfo')
+  }
+}
+
 export default { 
   setCart, 
   getCart, 
+  removeAllCart
 }

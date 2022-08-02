@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-// import { DefaultSeo } from 'next-seo'
-// import SEO from 'next-seo.config'
 import { Provider } from 'react-redux'
 import { useStore } from 'src/store/reducer'
 import { AuthProvider } from "src/components/auth-provider/auth-provider"
@@ -56,6 +54,7 @@ function MyApp(props) {
         <CacheProvider value={emotionCache}>
           <Head>
             <meta name="viewport" content="initial-scale=1, width=device-width" />
+            <title>HIVE Commerce</title>
           </Head>
           <ThemeProvider theme={theme}>
             <AuthProvider>

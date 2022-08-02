@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import nProgress from "nprogress";
 import 'nprogress/nprogress.css';
+import { Box } from "@mui/material";
 
 const Layout = ({ children }, showAfterMs = 250, options = { minimum: 0.01, speed: 500 }) => {
   const router = useRouter();
@@ -49,8 +50,10 @@ const Layout = ({ children }, showAfterMs = 250, options = { minimum: 0.01, spee
         {/* <link rel="icon" href="/favicon.png" /> */}
       </Head>
       {showHeader && <Header />}
-      <main style={showFooter ? {marginBottom: '60px'} : {marginBottom: '0'}}>
-        { children }
+      <main>
+        <Box pt={{md: 9, xs: 6}} pb={{md: 6, xs: 3}}>
+          { children }
+        </Box>
       </main>
       {/* {showFooter && <Footer />} */}
     </div> 

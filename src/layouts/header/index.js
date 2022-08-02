@@ -3,13 +3,15 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { Badge, Container, styled } from '@mui/material';
 import Link from 'next/link';
 import { Logout, ShoppingCart } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { auth } from 'src/store/actions/auth.action';
+import { ecommerce } from 'src/store/actions';
+import { useRouter } from 'next/router';
+import { authStore } from 'service';
 
 const ButtonWrapper = styled(Box)(({ theme }) => ({
   "@keyframes pop": {
@@ -36,6 +38,8 @@ const ButtonWrapper = styled(Box)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const { cart_data } = useSelector(state => state.ecommerce);
   // get total of cart_data qty
   const total = cart_data?.reduce((acc, cur) => acc + cur?.quantity, 0);
@@ -54,10 +58,22 @@ const Header = () => {
     }, 1000);
   }, [value]);
 
-  console.log('value', value)
+  // hide logout button when user not login
+  const [isHideLogout, setIsHideLogout] = useState(false);
+  useEffect(() => {
+    const authData = authStore.getAuth();
+    authData && setIsHideLogout(true);
+  }, [router])
+
+  // handle signOut
+  const handleSignOut = () => {
+    dispatch(auth.signOut())
+    dispatch(ecommerce.setCart('REMOVE_ALL_CART', []));
+    router.push('/login');
+  }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position: 'fixed', top: '0', left: '0', width: '100%', zIndex: '999' }}>
       <AppBar position="static">
         <Container>
           <Toolbar>
@@ -80,7 +96,7 @@ const Header = () => {
               <ButtonWrapper className={`${isAnimate ? 'animate': ''}`}>
                 <Link href="/cart" passHref>
                   <a>
-                    <IconButton size="large" aria-label="show 4 new mails" color="inherit" sx={{marginRight: '10px'}}>
+                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                       <Badge badgeContent={value} color="error">
                         <ShoppingCart />
                       </Badge>
@@ -88,14 +104,18 @@ const Header = () => {
                   </a>
                 </Link>
               </ButtonWrapper>
-              <IconButton
-                size="large"
-                edge="end"
-                // onClick={handleLogout}
-                color="inherit"
-              >
-                <Logout />
-              </IconButton>
+              {
+                isHideLogout && (
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    onClick={() => handleSignOut()}
+                    color="inherit"
+                  >
+                    <Logout />
+                  </IconButton>
+                )
+              }
             </Box>
           </Toolbar>
         </Container>

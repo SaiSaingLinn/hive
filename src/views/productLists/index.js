@@ -17,20 +17,26 @@ export default function ProductLists() {
   const { product_data, isLoading } = useSelector(state => state.product)
 
   useEffect(() => {
+    // if router is ready or not
+    if (!router.isReady) {
+      return;
+    }
+    // get page from router query and if page is undefined then set page to 1
+    const page = router.query.page ? +router.query.page : 1;
+    setPage(page)
+
     const postData = {
       size,
       page,
     }
     dispatch(product.getProduct(postData))
-  }, [dispatch, page, size])
+  }, [dispatch, page, size, router])
 
   // onChange Pagination
   const scrollRef = useRef(null)
   const onChangePaginate = (e, value) => {
     setPage(value) 
     scrollToRef(scrollRef)
-    console.log('value', value)
-    console.log('router', router)
 
     // router push value with key "page" to end of url
     let name = 'page'
@@ -42,7 +48,7 @@ export default function ProductLists() {
   }
 
   return (
-    <Box mt={5} mb={5}>
+    <Box mt={{md: 5, xs: 3}} mb={{md: 5, xs: 3}}>
       <Container>
         <Typography variant="h3" mb={2}>Best Seller</Typography>
         <ProductCard data={product_data} loading={isLoading} page={page} />

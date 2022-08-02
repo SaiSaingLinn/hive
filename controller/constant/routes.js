@@ -7,4 +7,7 @@ export const routes = {
 
   // login user
   loginApi: `post:api/auth/login`,
+
+  // place order
+  placeOrderApi: `post:api/orders`,
 }

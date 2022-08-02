@@ -1,7 +1,6 @@
 import { Add, AddShoppingCart, Remove } from "@mui/icons-material";
 import { Box, Button, ButtonGroup, Container, Grid, Skeleton, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ecommerceStore } from "service";
@@ -29,10 +28,11 @@ export default function ProductDetailInfo(props) {
   }
 
   // add to cart 
-  const handleAddToCart = (id, name, amount) => {
+  const handleAddToCart = (id, image, name, amount) => {
     if (!ecommerceStore.getCart()) {
       dispatch(ecommerce.setCart('ADD_TO_CART', [{
         productId: +id,
+        image,
         productName: name,
         amount: +amount,
         quantity: qty,
@@ -51,7 +51,11 @@ export default function ProductDetailInfo(props) {
       } else {
         cart?.push({
           productId: +id,
+          image,
+          productName: name,
+          amount: +amount,
           quantity: qty,
+          lineTotal: 0,
         })
         dispatch(ecommerce.setCart('ADD_TO_CART', cart))
       }
@@ -60,10 +64,10 @@ export default function ProductDetailInfo(props) {
 
   return (
     <>
-      <Box sx={{ mt: 4 }}>
+      <Box mt={{md: 4, xs: 3}}>
         <Container>
-          <Grid container spacing={6}>
-            <Grid item md={6} sm={12}>
+          <Grid container spacing={{md: 6, xs: 2}}>
+            <Grid item md={6} sm={12} xs={12}>
               <Box sx={{position: 'relative', width: '100%', height: 300}}>
                 {
                   loading ? (
@@ -80,7 +84,7 @@ export default function ProductDetailInfo(props) {
                 }
               </Box>
             </Grid>
-            <Grid item md={6} sm={12}>
+            <Grid item md={6} sm={12} xs={12}>
               {
                 loading ? (
                   <>
@@ -110,7 +114,7 @@ export default function ProductDetailInfo(props) {
                           variant="contained" 
                           size="medium" 
                           startIcon={<AddShoppingCart />} 
-                          onClick={() => handleAddToCart(data[0]?.id, data[0]?.name, data[0]?.amount)}
+                          onClick={() => handleAddToCart(data[0]?.id, data[0]?.image, data[0]?.name, data[0]?.amount)}
                         >
                           Add to Cart
                         </Button>

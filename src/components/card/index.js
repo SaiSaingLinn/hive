@@ -2,7 +2,6 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box, Grid, Skeleton } from '@mui/material';
@@ -44,7 +43,7 @@ export default function ProductCard(props) {
                     <Typography gutterBottom variant="h5" component="div">
                       {item?.name}
                     </Typography>
-                    <Typography variant="body1" sx={{color: theme.palette.primary.main}}>
+                    <Typography variant="caption" sx={{color: theme.palette.primary.main}}>
                       {item?.amount} Ks
                     </Typography>
                   </CardContent>
